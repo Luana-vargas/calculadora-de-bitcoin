@@ -1,2 +1,3 @@
 include ':app'
+include ':your-module'
 rootProject.name='Calculadora de Bitcoin'

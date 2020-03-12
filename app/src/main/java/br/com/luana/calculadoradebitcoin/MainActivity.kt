@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
 
             //para o código voltar a ser executado no processo principal
             uiThread {
-                txt_cotacao.text = cotacaoFormatada
+                txt_cotacao.setText("$cotacaoFormatada")
             }
 
         }
