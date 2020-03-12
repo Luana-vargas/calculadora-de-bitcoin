@@ -1,18 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     xml:tools="http://schemas.android.com/tools"
+    tools:context="br.com.luana.calculadoradebitcoin.MainActivity"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
 
-    <include layout="@layout/bloco_titulo"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Calculadora de Bitcoin"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
 
-    <include layout="@layout/bloco_cotacao"/>
 
-    <include layout="@layout/bloco_entrada"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cotação Atual: "/>
 
-    <include layout="@layout/bloco_saida"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_cotacao"
+        android:text="R$ 0.00"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Valor em reais:"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txt_valor"
+        android:hint="Ex: 45,00"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_calcular"
+        android:text="Calcular"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Quantidade de Bitcoins: "/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:id="@+id/txt_qtd_bitcoins"
+        android:text="0.00000000"/>
+
 
 
 </LinearLayout>
