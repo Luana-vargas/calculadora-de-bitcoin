@@ -1,14 +1,17 @@
 package br.com.luana.calculadoradebitcoin
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.AnkoAsyncContext
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import org.json.JSONObject
 import java.net.URL
 import java.text.NumberFormat
 import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,17 +24,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         buscarCotacao()
+        calcular()
 
         btn_calcular.setOnClickListener{
             calcular()
         }
-
     }
 
     fun buscarCotacao() {
 
-        //doAsync, função da lib Anko
-        // o codigo que estiver aqui executará em segundo plano
         doAsync {
 
             //Acessar a API e buscar seu resultado
@@ -42,17 +43,16 @@ class MainActivity : AppCompatActivity() {
 
             //Formatação em moeda
             val f= NumberFormat.getCurrencyInstance(Locale("pt", "br"))
-            val cotacaoFormatada = f.format(cotacaoBitcoin)
 
+            val cotacaoFormatada = f.format(cotacaoBitcoin)
 
             //para o código voltar a ser executado no processo principal
             uiThread {
-                txt_cotacao.setText("$cotacaoFormatada")
+                txt_cotacao.text = "$cotacaoFormatada"
             }
-
         }
-
     }
+
 
     fun calcular() {
 
@@ -73,6 +73,5 @@ class MainActivity : AppCompatActivity() {
 
         //atualizando a TextView com o resultado formatado com 8 casas decimais
         txt_qtd_bitcoins.text = "%.8f".format(resultado)
-
     }
 }

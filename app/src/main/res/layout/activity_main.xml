@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFF"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".MainActivity">
@@ -11,24 +12,22 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="257dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="20dp"
         android:gravity="center"
         android:text="Calculadora de Bitcoin"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="80dp"
         android:hint="Cotação Atual: "
         android:textSize="18sp"
@@ -39,7 +38,7 @@
         android:id="@+id/txt_cotacao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="80dp"
         android:text="R$ 0,00"
         android:textSize="18sp"
@@ -51,57 +50,71 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="15dp"
         android:text="Valor em reais:"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintBottom_toTopOf="@+id/txt_valor"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/txt_valor"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="24dp"
+        android:layout_width="336dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="116dp"
         android:hint="Ex: 45,00"
-        app:layout_constraintBottom_toTopOf="@+id/btn_calcular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/txt_cotacao" />
 
     <Button
         android:id="@+id/btn_calcular"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="22dp"
-        android:layout_marginEnd="16dp"
+        android:layout_width="234dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="49dp"
+        android:background="#708090"
         android:text="Calcular"
+        app:layout_constraintBottom_toTopOf="@+id/txt_qtd_bitcoins"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_valor" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="220dp"
-        android:text="Quantidade de Bitcoins: "
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/txt_qtd_bitcoins"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="220dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="90dp"
         android:text="0.00000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView2" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView2"
+        app:layout_constraintTop_toBottomOf="@+id/btn_calcular" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="53dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="20dp"
+        android:text="Quantidade de Bitcoins: "
+        app:layout_constraintEnd_toStartOf="@+id/txt_qtd_bitcoins"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_calcular" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="80dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_bitcoin" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
