@@ -53,7 +53,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     fun calcular() {
 
         if(txt_valor.text.isEmpty()) {
