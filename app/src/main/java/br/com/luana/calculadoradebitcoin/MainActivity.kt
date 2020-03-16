@@ -45,9 +45,12 @@ class MainActivity : AppCompatActivity() {
 
        txt_valor.addTextChangedListener(MonetaryMask.monetary(txt_valor))
         txt_valor.setOnEditorActionListener { v, actionId, event ->
+
             if ( actionId == EditorInfo.IME_ACTION_DONE ||
                 event.action == KeyEvent.ACTION_DOWN &&
-                event.keyCode == KeyEvent.KEYCODE_ENTER){
+                event.keyCode == KeyEvent.KEYCODE_ENTER ||
+                    event.action == KeyEvent.ACTION_DOWN &&
+                    event.keyCode == KeyEvent.KEYCODE_NUMPAD_ENTER){
                 calcular()
                 v.hideKeyboard()
                 true
