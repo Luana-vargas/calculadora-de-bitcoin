@@ -1,5 +1,6 @@
 package br.com.luana.calculadoradebitcoin
 
+import MonetaryMask
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -21,11 +22,14 @@ import androidx.core.app.ComponentActivity
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.text.TextUtils.replace
 import org.w3c.dom.Text
 import java.text.DecimalFormat
+import kotlin.math.round
 
 
 class MainActivity : AppCompatActivity() {
+
 
     val API_URL = "https://www.mercadobitcoin.net/api/BTC/ticker/"
 
@@ -37,9 +41,7 @@ class MainActivity : AppCompatActivity() {
 
         buscarCotacao()
 
-        txt_valor.addTextChangedListener(Mask.monetary(txt_valor))
-
-        val valor = txt_valor.text.toString().replace(Regex("[\\D]"), "")
+       txt_valor.addTextChangedListener(MonetaryMask.monetary(txt_valor))
 
 
         btn_calcular.setOnClickListener {
@@ -60,7 +62,7 @@ class MainActivity : AppCompatActivity() {
             cotacaoBitcoin = JSONObject(resposta).getJSONObject("ticker").getDouble("last")
 
             //Formatação em moeda
-            val f= NumberFormat.getCurrencyInstance(Locale("pt", "br"))
+            val f = NumberFormat.getCurrencyInstance(Locale("pt", "br"))
 
             val cotacaoFormatada = f.format(cotacaoBitcoin)
 
@@ -82,14 +84,14 @@ class MainActivity : AppCompatActivity() {
         pb_loading.visibility = View.VISIBLE // exibindo barra de progresso
         btn_calcular.visibility = View.GONE // escondendo botão
 
-        val valor_digitado = txt_valor.text.toString()
-            .replace(",", ".")
-           .toDouble()
+
+        val valor_digitado = MonetaryMask.unMask(txt_valor).toDouble()
+
 
         //calculando o resultado
         //caso o valor da cotacão seja maior que zero, efetuamos o calculo
         //caso contrario devolvemos 0
-        val resultado =   if(cotacaoBitcoin > 0) valor_digitado / cotacaoBitcoin else 0.0
+        val resultado =   if(cotacaoBitcoin > 0) valor_digitado / (round(cotacaoBitcoin*100.0) / 100.0) else 0.0
 
         //atualizando a TextView com o resultado formatado com 8 casas decimais
         txt_qtd_bitcoins.text = "%.8f".format(resultado)

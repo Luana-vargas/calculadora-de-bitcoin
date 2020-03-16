@@ -2,19 +2,22 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 import java.text.NumberFormat
+import java.util.*
 
-/**
- * Created by Ronald Santos
- * Date: 03/13/2020
- * Time: 15:37
- */
 
-class Mask{
+class MonetaryMask{
 
     companion object {
 
         private fun replaceChars(txt: String): String {
             return txt.replace(Regex("[\\D]"), "")
+        }
+
+        fun unMask (edit: EditText): String {
+           return edit.text.toString()
+               .replace(Regex("[a-zA-Z\$.]"), "")
+               .replace(",", ".")
+               .trim() // trocar letras por vazio
         }
 
         fun monetary(edit: EditText): TextWatcher{
@@ -32,7 +35,7 @@ class Mask{
                     after: Int
                 ) {
                 }
-
+//s= retorna o que foi digitado no edt / count === zero usuário apagando algo do edt
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                     if (!s.toString().equals(current)){
                         edit.removeTextChangedListener(this)
@@ -40,7 +43,7 @@ class Mask{
 
                         val value = cleanString.toDouble()
 
-                        val formated = NumberFormat.getCurrencyInstance().format((value/100))
+                        val formated = NumberFormat.getCurrencyInstance(Locale("pt", "br")).format((value/100))
 
                         current = formated
                         edit.setText(formated)
