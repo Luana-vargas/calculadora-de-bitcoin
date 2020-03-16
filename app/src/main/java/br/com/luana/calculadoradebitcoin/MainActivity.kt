@@ -2,6 +2,7 @@ package br.com.luana.calculadoradebitcoin
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.jetbrains.anko.AnkoAsyncContext
@@ -11,6 +12,17 @@ import org.json.JSONObject
 import java.net.URL
 import java.text.NumberFormat
 import java.util.*
+import android.text.Editable
+import android.text.TextWatcher
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.widget.EditText
+import androidx.core.app.ComponentActivity
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import org.w3c.dom.Text
+import java.text.DecimalFormat
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,12 +36,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         buscarCotacao()
-        calcular()
 
-        btn_calcular.setOnClickListener{
+        txt_valor.addTextChangedListener(Mask.monetary(txt_valor))
+
+        val valor = txt_valor.text.toString().replace(Regex("[\\D]"), "")
+
+
+        btn_calcular.setOnClickListener {
             calcular()
         }
+
     }
+
 
     fun buscarCotacao() {
 
@@ -55,15 +73,18 @@ class MainActivity : AppCompatActivity() {
 
     fun calcular() {
 
+
         if(txt_valor.text.isEmpty()) {
             txt_valor.error = "Preencha um valor"
             return
         }
 
-        //valor digitado pelo usuário
+        pb_loading.visibility = View.VISIBLE // exibindo barra de progresso
+        btn_calcular.visibility = View.GONE // escondendo botão
+
         val valor_digitado = txt_valor.text.toString()
             .replace(",", ".")
-            .toDouble()
+           .toDouble()
 
         //calculando o resultado
         //caso o valor da cotacão seja maior que zero, efetuamos o calculo
@@ -72,5 +93,11 @@ class MainActivity : AppCompatActivity() {
 
         //atualizando a TextView com o resultado formatado com 8 casas decimais
         txt_qtd_bitcoins.text = "%.8f".format(resultado)
+
+        pb_loading.visibility = View.GONE // esconder barra de progresso
+        btn_calcular.visibility = View.VISIBLE // exibindo botão
     }
+
 }
+
+

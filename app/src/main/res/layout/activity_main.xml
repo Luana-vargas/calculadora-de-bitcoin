@@ -66,6 +66,7 @@
         android:layout_height="39dp"
         android:layout_marginTop="116dp"
         android:hint="Ex: 45,00"
+        android:inputType="numberDecimal"
         android:textColor="@color/Text"
         android:textColorLink="@color/Text"
         app:layout_constraintEnd_toEndOf="parent"
@@ -75,13 +76,14 @@
 
     <Button
         android:id="@+id/btn_calcular"
-        android:layout_width="234dp"
-        android:layout_height="42dp"
+        android:layout_width="232dp"
+        android:layout_height="47dp"
         android:layout_marginTop="25dp"
         android:layout_marginBottom="49dp"
-        android:background="#708090"
+        android:background="@drawable/botao_customizado"
         android:text="Calcular"
-        android:textColor="@color/Text"
+        android:textColor="#FFF"
+        android:textSize="14sp"
         app:layout_constraintBottom_toTopOf="@+id/txt_qtd_bitcoins"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -97,6 +99,7 @@
         android:layout_marginEnd="50dp"
         android:text="0.00000000"
         android:textColor="@color/Text"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/textView2"
         app:layout_constraintTop_toBottomOf="@+id/btn_calcular" />
@@ -110,6 +113,7 @@
         android:layout_marginEnd="20dp"
         android:text="Quantidade de Bitcoins: "
         android:textColor="@color/Text"
+        android:textSize="18sp"
         app:layout_constraintEnd_toStartOf="@+id/txt_qtd_bitcoins"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_calcular" />
@@ -123,6 +127,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_bitcoin" />
+
+    <ProgressBar
+        android:id="@+id/pb_loading"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="@+id/btn_calcular"
+        app:layout_constraintStart_toStartOf="@+id/btn_calcular"
+        app:layout_constraintTop_toTopOf="@+id/btn_calcular" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
