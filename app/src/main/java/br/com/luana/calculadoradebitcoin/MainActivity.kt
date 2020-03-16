@@ -23,6 +23,8 @@ import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.text.TextUtils.replace
+import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
 import org.w3c.dom.Text
 import java.text.DecimalFormat
 import kotlin.math.round
@@ -42,9 +44,20 @@ class MainActivity : AppCompatActivity() {
         buscarCotacao()
 
        txt_valor.addTextChangedListener(MonetaryMask.monetary(txt_valor))
+        txt_valor.setOnEditorActionListener { v, actionId, event ->
+            if ( actionId == EditorInfo.IME_ACTION_DONE ||
+                event.action == KeyEvent.ACTION_DOWN &&
+                event.keyCode == KeyEvent.KEYCODE_ENTER){
+                calcular()
+                v.hideKeyboard()
+                true
+            }
+            false
+        }
 
 
         btn_calcular.setOnClickListener {
+            it.hideKeyboard()
             calcular()
         }
 
@@ -98,6 +111,8 @@ class MainActivity : AppCompatActivity() {
 
         pb_loading.visibility = View.GONE // esconder barra de progresso
         btn_calcular.visibility = View.VISIBLE // exibindo botão
+
+
     }
 
 }
