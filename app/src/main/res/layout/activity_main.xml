@@ -66,6 +66,7 @@
         android:layout_height="39dp"
         android:layout_marginTop="116dp"
         android:hint="Ex: 45,00"
+        android:backgroundTint="@color/Text"
         android:inputType="numberDecimal"
         android:textColor="@color/Text"
         android:textColorLink="@color/Text"
