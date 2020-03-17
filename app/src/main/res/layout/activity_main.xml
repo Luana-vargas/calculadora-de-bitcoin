@@ -41,7 +41,7 @@
         android:id="@+id/txt_cotacao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="80dp"
         android:text="R$ 0,00"
         android:textSize="20sp"
@@ -84,7 +84,7 @@
         android:layout_height="47dp"
         android:layout_marginTop="25dp"
         android:layout_marginBottom="49dp"
-        android:background="@drawable/botao_customizado"
+        android:background="@drawable/botao_calcular_customizado"
         android:text="Calcular"
         android:textColor="#FFF"
         android:textSize="16sp"
@@ -142,6 +142,17 @@
         app:layout_constraintEnd_toEndOf="@+id/btn_calcular"
         app:layout_constraintStart_toStartOf="@+id/btn_calcular"
         app:layout_constraintTop_toTopOf="@+id/btn_calcular" />
+
+    <ImageButton
+        android:id="@+id/btn_reload"
+        android:layout_width="38dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="73dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/botao_reload_customizado"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:srcCompat="@drawable/ic_cached_black_24dp" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

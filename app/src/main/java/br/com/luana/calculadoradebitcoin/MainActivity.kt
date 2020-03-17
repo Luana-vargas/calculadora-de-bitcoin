@@ -64,6 +64,10 @@ class MainActivity : AppCompatActivity() {
             calcular()
         }
 
+        btn_reload.setOnClickListener {
+            buscarCotacao()
+        }
+
     }
 
 
