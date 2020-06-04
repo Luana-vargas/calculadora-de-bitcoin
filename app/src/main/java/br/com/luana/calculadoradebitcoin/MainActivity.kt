@@ -2,8 +2,10 @@ package br.com.luana.calculadoradebitcoin
 
 import MonetaryMask
 import android.os.Bundle
+import android.view.KeyEvent
 
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
@@ -28,18 +30,36 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         job = Job()
+
         atualizarValor()
+
+        txt_valor.addTextChangedListener(MonetaryMask.monetary(txt_valor))
+        txt_valor.setOnEditorActionListener { v, actionId, event ->
+
+            if ( actionId == EditorInfo.IME_ACTION_DONE ||
+                event.action == KeyEvent.ACTION_DOWN &&
+                event.keyCode == KeyEvent.KEYCODE_ENTER ||
+                event.action == KeyEvent.ACTION_DOWN &&
+                event.keyCode == KeyEvent.KEYCODE_NUMPAD_ENTER){
+                calcular()
+                v.hideKeyboard()
+                true
+            }
+            false
+        }
+
+
+        btn_calcular.setOnClickListener {
+            it.hideKeyboard()
+            calcular()
+           // notificacaoSimples("Teste", "Teste")
+        }
 
 
         btn_reload.setOnClickListener {
             atualizarValor()
         }
 
-        btn_calcular.setOnClickListener {
-            it.hideKeyboard()
-            calcular()
-            notificacaoSimples("Teste", "Teste")
-        }
     }
 
     fun calcular() {
@@ -49,19 +69,9 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
             return
         }
 
-        pb_loading.visibility = View.VISIBLE // exibindo barra de progresso
-        btn_calcular.visibility = View.GONE // escondendo botão
-
         val valor_digitado = MonetaryMask.unMask(txt_valor).toDouble()
-        if (cotacaoBitcoin > 0) valor_digitado / (round(cotacaoBitcoin * 100.0) / 100.0) else 0.0
-
-        pb_loading.visibility = View.GONE // esconder barra de progresso
-        btn_calcular.visibility = View.VISIBLE // exibindo botão
-
-        val f = NumberFormat.getCurrencyInstance(Locale("pt", "br"))
-        val cotacaoFormatada = f.format(cotacaoBitcoin)
-
-        txt_qtd_bitcoins.text = cotacaoFormatada
+        val resultado = if (cotacaoBitcoin > 0) valor_digitado / (round(cotacaoBitcoin * 100.0) / 100.0) else 0.0
+        txt_qtd_bitcoins.text = "%.8f".format(resultado)
 
     }
 
@@ -69,7 +79,6 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         super.onDestroy()
         job.cancel()
     }
-
 
     private suspend fun buscarCotacao(): String {
         val resposta = URL(API_URL).readText()
