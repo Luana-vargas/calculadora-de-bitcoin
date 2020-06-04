@@ -43,7 +43,8 @@ class MonetaryMask{
 
                         val value = cleanString.toDouble()
 
-                        val formated = NumberFormat.getCurrencyInstance(Locale("pt", "br")).format((value/100))
+                        val formated = NumberFormat.getCurrencyInstance(Locale
+                            ("pt", "br")).format((value/100))
 
                         current = formated
                         edit.setText(formated)
@@ -106,9 +107,7 @@ class MonetaryMask{
                     isUpdating = true
                     edit.setText(formated)
                     edit.setSelection(formated.length)
-
                 }
-
             }
             return textWatcher
         }
