@@ -47,7 +47,6 @@ fun Activity.notificacaoSimples(title:String, message:String) {
         notificationManager.createNotificationChannel(channel)
     }
 
-
     // enviando a notificação em si
     notificationManager.notify(1, notificacao)
 
