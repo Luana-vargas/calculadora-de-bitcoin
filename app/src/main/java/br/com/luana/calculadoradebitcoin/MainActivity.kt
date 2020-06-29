@@ -52,7 +52,6 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         btn_calcular.setOnClickListener {
             it.hideKeyboard()
             calcular()
-           // notificacaoSimples("Teste", "Teste")
         }
 
 
