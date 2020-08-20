@@ -17,7 +17,7 @@ class MonetaryMask{
            return edit.text.toString()
                .replace(Regex("[a-zA-Z\$.]"), "")
                .replace(",", ".")
-               .trim() // trocar letras por vazio
+               .trim()
         }
 
         fun monetary(edit: EditText): TextWatcher{
